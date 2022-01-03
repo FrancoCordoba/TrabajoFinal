@@ -14,7 +14,7 @@ public class AnimationAndoMovementController : MonoBehaviour
     Animator animator;
     //Variables de control
     [SerializeField] private int life = 3;
-
+    
     //variables para almacenar los valores del player input 
     Vector2 currentMovementInput;
     Vector3 currentMovement;
@@ -66,6 +66,7 @@ public class AnimationAndoMovementController : MonoBehaviour
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
@@ -79,6 +80,7 @@ public class AnimationAndoMovementController : MonoBehaviour
         playerInput.CharacterControl.Jump.started += onJump;
         playerInput.CharacterControl.Jump.canceled += onJump;
         SetJumpVariables();
+       
     }
     
     void SetJumpVariables()
@@ -143,6 +145,7 @@ public class AnimationAndoMovementController : MonoBehaviour
         {
             UseItem();
         }
+      
 
     }
 
@@ -249,8 +252,12 @@ public class AnimationAndoMovementController : MonoBehaviour
             if (life ==0)
             {
                 onDeath();
-
+                Destroy(gameObject);
             }
+        }
+        if (other.gameObject.CompareTag("VOID"))
+        {
+            Destroy(gameObject);
         }
 
 
